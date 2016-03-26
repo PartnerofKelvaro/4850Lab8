@@ -20,10 +20,10 @@ and open the template in the editor.
     </xs:simpleType>
     
     <xs:simpleType name="HourMinuteTime" id="time">
- <xs:restriction base="xs:time">
- <xs:whiteSpace value="collapse" fixed="true"/>
- </xs:restriction>
-</xs:simpleType>
+        <xs:restriction base="xs:time">
+            <xs:whiteSpace value="collapse" fixed="true"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     
     <xs:simpleType name="TcourseID">
@@ -45,15 +45,47 @@ and open the template in the editor.
     
     
     
+    
+    
+    
     <xs:element name="schedule">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="courses" type="Tcourses" maxOccurs="3"/>
-          <!--     // <xs:element name="days" type="Tdays" maxOccurs="3"/> -->
-              <!--  <xs:element name="timeslots" type="Ttimeslots" maxOccurs="3"/> -->
+                <xs:element name="days" type="Tdays" maxOccurs="3"/>
+                <xs:element name="timeslots" type="Ttimeslots" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    
+    
+    <xs:complexType name="Ttimeslots">
+        <xs:sequence>
+            <xs:element name="timeslot" type="Ttimeslot" maxOccurs="9"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Ttimeslot">
+        <xs:sequence>
+            <xs:element name="booking" type="Tbooking" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="time" type="HourMinuteTime" use="required"/>
+    </xs:complexType>
+    
+    <xs:complexType name="Tdays">
+        <xs:sequence>
+            <xs:element name="day" type="Tday" maxOccurs="6"/>
+        </xs:sequence>
+    </xs:complexType>
+        
+    <xs:complexType name="Tday">
+        <xs:sequence>
+            <xs:element name="booking" type="Tbooking" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="daySchedule" type="Tweekday" use="required"/>
+    </xs:complexType>
+    
+    
     
     
     
@@ -68,7 +100,6 @@ and open the template in the editor.
             <xs:element name="booking" type="Tbooking" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="courseID" type="xs:string" use="required"/>
-        
     </xs:complexType>
     
     
