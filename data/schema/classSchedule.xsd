@@ -19,11 +19,12 @@ and open the template in the editor.
         </xs:restriction>
     </xs:simpleType>
     
-    <xs:simpleType name="HourMinuteTime">
-        <xs:restriction base="xs:date">
-            <xs:pattern value="[0-2][0-9]:[0-6][0-9]"/>
-        </xs:restriction>
-    </xs:simpleType>
+    <xs:simpleType name="HourMinuteTime" id="time">
+ <xs:restriction base="xs:time">
+ <xs:whiteSpace value="collapse" fixed="true"/>
+ </xs:restriction>
+</xs:simpleType>
+
     
     <xs:simpleType name="TcourseID">
         <xs:restriction base="xs:integer">
