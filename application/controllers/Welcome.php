@@ -19,7 +19,37 @@ class Welcome extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index()
-	{
+	{       
+            $this->data['courses'] = $this->course_dropdown();
+            $this->data['days'] = $this->days_dropdown();
+            $this->data['timeslots'] = $this->timeslots_dropdown();
 		$this->load->view('welcome_message');
+                $this->render();
 	}
+        
+        
+        public function course_dropdown(){
+            
+            $course = array();
+            foreach ($this->master->courses() as $courses);
+            
+            
+        }
+        
+        public function days_dropdown(){
+            $day = array();
+            
+            foreach ($this->schedule->days() as $days) {
+                $day[] = array(
+                    'select' => $days->select,
+                    'day' => $days->name
+                );
+            }
+            
+            
+        }
+        
+        public function timeslots_dropdown();
+        
+       
 }

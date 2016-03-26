@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    
+    
+    
+    
+
+    <xs:simpleType name="Ttime">
+        <xs:restriction base="xs:integer">
+            <xs:pattern value="[0-2][0-9][0-5][0-9]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="HourMinuteTime">
+        <xs:restriction base="xs:date">
+            <xs:pattern value="[0-2][0-9]:[0-6][0-9]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TcourseID">
+        <xs:restriction base="xs:integer">
+            <xs:pattern value="[0-4][0-9][0-9][0-9]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="Tweekday">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Monday"/>
+            <xs:enumeration value="Tuesday"/>
+            <xs:enumeration value="Wednesday"/>
+            <xs:enumeration value="Thursday"/>
+            <xs:enumeration value="Friday"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    
+    
+    <xs:element name="schedule">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="courses" type="Tcourses" maxOccurs="3"/>
+          <!--     // <xs:element name="days" type="Tdays" maxOccurs="3"/> -->
+              <!--  <xs:element name="timeslots" type="Ttimeslots" maxOccurs="3"/> -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    
+    
+    <xs:complexType name="Tcourses">
+        <xs:sequence>
+            <xs:element name="course" type="Tcourse" maxOccurs="6"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Tcourse">
+        <xs:sequence>
+            <xs:element name="booking" type="Tbooking" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="courseID" type="xs:string" use="required"/>
+        
+    </xs:complexType>
+    
+    
+    <xs:complexType name="Tbooking">
+        <xs:attribute name="courseName" type="TcourseID" use="required"/>
+        <xs:attribute name="weekDay" type="Tweekday" use="required"/>
+        <xs:attribute name="startTime" type="HourMinuteTime" use="required"/>
+        <xs:attribute name="endTime" type="HourMinuteTime" use="required"/>
+        <xs:attribute name="instructor" type="xs:string" use="required"/>
+        <xs:attribute name="classActivity" type="xs:string" use="required"/>
+        <xs:attribute name="classLocation" type="xs:string" use="required"/>
+    </xs:complexType>
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</xs:schema>
